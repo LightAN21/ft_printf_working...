@@ -6,7 +6,7 @@
 /*   By: jtsai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/17 10:53:18 by jtsai             #+#    #+#             */
-/*   Updated: 2018/08/24 09:43:48 by jtsai            ###   ########.fr       */
+/*   Updated: 2018/08/24 09:56:06 by jtsai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	deal_int(t_var *data, t_long num)
 		save_char(data, data->flag['_'] - max(data->flag['/'], len), 1, ' ');
 }
 
-void	deal_int_base(t_var *data, t_max num, t_max base, char c)
+void	deal_int_base(t_var *data, t_max num, t_max base, char type)
 {
 	t_max	len;
 	t_max	i;
@@ -90,13 +90,13 @@ void	deal_int_base(t_var *data, t_max num, t_max base, char c)
 		save_char(data, data->flag['_'] - max(data->flag['/'], len), 1, ' ');
 	if (data->flag['#'] && (base == 8 || base == 16))
 		data->p[data->k++] = '0';
-	if (data->flag['#'] && base == 16)
-		data->p[data->k++] = (c == 'x') ? 'x' : 'X';
+	if (data->flag['#'] && (base == 16 || type == 'p'))
+		data->p[data->k++] = (type == 'x') ? 'x' : 'X';
 	if (data->flag['.'] && data->flag['/'] > len)
 		save_char(data, data->flag['/'] - len, 0, '0');
 	else if (data->flag['0'] && !data->flag['-'] && !data->flag['.'])
 		save_char(data, data->flag['_'] - len, 1, '0');
-	save_itoa_base(data, num, base, c);
+	save_itoa_base(data, num, base, type);
 	if (data->flag['-'])
 		save_char(data, data->flag['_'] - max(data->flag['/'], len), 1, ' ');
 }
