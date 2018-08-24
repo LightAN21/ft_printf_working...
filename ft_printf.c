@@ -6,7 +6,7 @@
 /*   By: jtsai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/14 14:46:12 by jtsai             #+#    #+#             */
-/*   Updated: 2018/08/24 11:13:23 by jtsai            ###   ########.fr       */
+/*   Updated: 2018/08/24 11:14:54 by jtsai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ void	read_string(t_var *data, char *s)
 	{
 		if (s[i] == '\\' && s[i + 1] == '%')
 			data->p[data->k++] = '%';
-		else if (s[i] == '%' && s[i + 1] == '@')
-			data->p[data->k++] = s[i++ + 1];
 		else if (s[i] == '%')
 		{
 			i = read_flags(data, s, ++i);
