@@ -6,13 +6,13 @@
 /*   By: jtsai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/18 15:53:24 by jtsai             #+#    #+#             */
-/*   Updated: 2018/08/23 14:53:57 by jtsai            ###   ########.fr       */
+/*   Updated: 2018/08/23 17:14:32 by jtsai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	type(int k)
+int		type(int k)
 {
 	return (k == 's' || k == 'S' || k == 'p' || k == 'd' || k == 'D' || \
 			k == 'i' || k == 'o' || k == 'O' || k == 'u' || k == 'U' || \
@@ -36,7 +36,7 @@ void	init_flags(t_var *data)
 	data->flag['z'] = 0;
 }
 
-int	read_flags(t_var *data, char *s, int i)
+int		read_flags(t_var *data, char *s, int i)
 {
 	init_flags(data);
 	if (type(s[i]))

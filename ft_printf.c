@@ -6,27 +6,11 @@
 /*   By: jtsai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/14 14:46:12 by jtsai             #+#    #+#             */
-/*   Updated: 2018/08/23 09:17:24 by jtsai            ###   ########.fr       */
+/*   Updated: 2018/08/23 17:12:53 by jtsai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-void	read_string(t_var *data, char *s);
-
-int		ft_printf(const char *str, ...)
-{
-	char	*s;
-	t_var	data;
-
-	s = (char *)str;
-	va_start(data.args, str);
-	read_string(&data, s);
-	write(1, data.p, data.k);
-	data.return_value += (t_max)data.k;
-	va_end(data.args);
-	return (data.return_value);
-}
 
 void	read_string(t_var *data, char *s)
 {
@@ -53,4 +37,18 @@ void	read_string(t_var *data, char *s)
 			i = -1;
 		}
 	}
+}
+
+int		ft_printf(const char *str, ...)
+{
+	char	*s;
+	t_var	data;
+
+	s = (char *)str;
+	va_start(data.args, str);
+	read_string(&data, s);
+	write(1, data.p, data.k);
+	data.return_value += (t_max)data.k;
+	va_end(data.args);
+	return (data.return_value);
 }

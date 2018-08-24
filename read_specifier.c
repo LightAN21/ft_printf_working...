@@ -6,14 +6,43 @@
 /*   By: jtsai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/23 08:05:49 by jtsai             #+#    #+#             */
-/*   Updated: 2018/08/23 16:45:35 by jtsai            ###   ########.fr       */
+/*   Updated: 2018/08/23 17:16:38 by jtsai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	type_di(t_var *data, char type);
-void	type_oux(t_var *data, char type, t_max base);
+void	type_di(t_var *data, char type)
+{
+	if (type == 'D' || data->flag['l'] || data->flag['j'] ||
+			data->flag['t'] || data->flag['z'])
+		deal_int(data, va_arg(data->args, t_long));
+	else if (data->flag['h'])
+		deal_int(data, (short)va_arg(data->args, int));
+	else if (data->flag['H'])
+		deal_int(data, (char)va_arg(data->args, int));
+	else
+		deal_int(data, va_arg(data->args, int));
+}
+
+void	type_oux(t_var *data, char type, t_max base)
+{
+	if (type == 'p')
+		data->flag['#'] = 1;
+	if (type == 'U' || type == 'O' || type == 'p' ||
+			data->flag['l'] || data->flag['j'])
+		deal_int_base(data, va_arg(data->args, t_max), base, type);
+	else if (data->flag['t'] || data->flag['z'])
+		deal_int_base(data, va_arg(data->args, t_long), base, type);
+	else if (data->flag['h'])
+		deal_int_base(data, (unsigned short)va_arg(data->args, int),
+				base, type);
+	else if (data->flag['H'])
+		deal_int_base(data, (unsigned char)va_arg(data->args, int),
+				base, type);
+	else
+		deal_int_base(data, va_arg(data->args, unsigned int), base, type);
+}
 
 int		read_specifier(t_var *data, char type, int i)
 {
@@ -36,33 +65,4 @@ int		read_specifier(t_var *data, char type, int i)
 	else if (type < 32)
 		i--;
 	return (i);
-}
-
-void	type_di(t_var *data, char type)
-{
-	if (type == 'D' || data->flag['l'] || data->flag['j'] ||
-			data->flag['t'] || data->flag['z'])
-		deal_int(data, va_arg(data->args, t_long));
-	else if (data->flag['h'])
-		deal_int(data, (short)va_arg(data->args, int));
-	else if (data->flag['H'])
-		deal_int(data, (char)va_arg(data->args, int));
-	else
-		deal_int(data, va_arg(data->args, int));
-}
-
-void	type_oux(t_var *data, char type, t_max base)
-{
-	if (type == 'p')
-		data->flag['#'] = 1;
-	if (type == 'U' || type == 'O' || type == 'p' || data->flag['l'] || data->flag['j'])
-		deal_int_base(data, va_arg(data->args, t_max), base, type);
-	else if (data->flag['t'] || data->flag['z'])
-		deal_int_base(data, va_arg(data->args, t_long), base, type);
-	else if (data->flag['h'])
-		deal_int_base(data, (unsigned short)va_arg(data->args, int), base, type);
-	else if (data->flag['H'])
-		deal_int_base(data, (unsigned char)va_arg(data->args, int), base, type);
-	else
-		deal_int_base(data, va_arg(data->args, unsigned int), base, type);
 }

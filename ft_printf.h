@@ -6,7 +6,7 @@
 /*   By: jtsai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/14 14:37:07 by jtsai             #+#    #+#             */
-/*   Updated: 2018/08/23 16:38:33 by jtsai            ###   ########.fr       */
+/*   Updated: 2018/08/23 17:19:14 by jtsai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,22 +36,25 @@ typedef struct					s_var
 }								t_var;
 
 /*
-**		 	   {-,  +, space, 0,  #,   *,  min_width, '.', pre_width, h,   hh,  l,   ll,  j,   z}
-** flag[128] : '-','+',' ' , '0','#', '*', '_',       '.', '/',      'h', 'H', 'l', 'l', 'j', 'z'
+**		 	   {-,  +, space, 0,  #,   *,  min_width, '.', pre_width}
+** flag[128] : '-','+',' ' , '0','#', '*', '_',       '.', '/'
 */
 
-int								ft_printf(const char *s, ... );
+int								ft_printf(const char *s, ...);
 int								read_specifier(t_var *data, char type, int i);
 int								type(int k);
 int								read_flags(t_var *v, char *s, int i);
 int								re_atoi(char *s, int *i);
 void							save_itoa(t_var *v, int k, t_long num);
 void							save_itoa_u(t_var *v, int k, t_max num);
-void							save_itoa_base(t_var *v, t_max num, t_max base, char c);
-void							save_char(t_var *v, int bound, int mark, char c);
+void							save_itoa_base(t_var *v,
+		t_max num, t_max base, char c);
+void							save_char(t_var *v,
+		int bound, int mark, char c);
 void							deal_int(t_var *v, t_long num);
 void							deal_int_u(t_var *v, t_max num);
-void							deal_int_base(t_var *data, t_max num, t_max base, char c);
+void							deal_int_base(t_var *data,
+		t_max num, t_max base, char c);
 void							save_str(t_var *v, char *s, t_max len);
 void							deal_str(t_var *v, char *s);
 void							deal_char(t_var *v, int c);

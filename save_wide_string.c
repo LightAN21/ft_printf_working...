@@ -6,7 +6,7 @@
 /*   By: jtsai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/23 16:30:50 by jtsai             #+#    #+#             */
-/*   Updated: 2018/08/23 16:42:04 by jtsai            ###   ########.fr       */
+/*   Updated: 2018/08/23 17:13:42 by jtsai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,8 @@ void	save_wide_char(t_var *data, wchar_t wc)
 		data->p[data->k++] = (((wc >> 12) & 0x3F) + 0x80);
 		data->p[data->k++] = (((wc >> 6) & 0x3F) + 0x80);
 		data->p[data->k++] = ((wc & 0x3F) + 0x80);
-	}	
+	}
 }
-
 
 void	save_wide_string(t_var *data, wchar_t *ws)
 {
