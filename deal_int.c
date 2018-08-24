@@ -6,7 +6,7 @@
 /*   By: jtsai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/17 10:53:18 by jtsai             #+#    #+#             */
-/*   Updated: 2018/08/23 16:03:41 by jtsai            ###   ########.fr       */
+/*   Updated: 2018/08/24 09:43:48 by jtsai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void	deal_zero_base(t_var *data, t_max base)
 	t_max	len;
 
 	len = 1;
-	if (!(data->flag['-']) && (!(data->flag['0']) ||
-				(data->flag['0'] && data->flag['.'])))
+	if (data->flag['_'] && (!(data->flag['-']) && (!(data->flag['0']) ||
+				(data->flag['0'] && data->flag['.']))))
 		save_char(data, data->flag['_'] - max(data->flag['/'], len), 1, ' ');
 	if (base == 10 && data->flag['+'])
 		data->p[data->k++] = '+';
@@ -56,8 +56,8 @@ void	deal_int(t_var *data, t_long num)
 		++len;
 	if (num < 0 && !data->flag['+'] && !data->flag[' '])
 		data->flag['_']--;
-	if (!(data->flag['-']) && (!(data->flag['0']) ||
-				(data->flag['0'] && data->flag['.'])))
+	if (data->flag['_'] && (!(data->flag['-']) && (!(data->flag['0']) ||
+				(data->flag['0'] && data->flag['.']))))
 		save_char(data, data->flag['_'] - max(data->flag['/'], len), 1, ' ');
 	if (data->flag['+'] || num < 0)
 		data->p[data->k++] = (num >= 0) ? '+' : '-';
@@ -85,8 +85,8 @@ void	deal_int_base(t_var *data, t_max num, t_max base, char c)
 		++len;
 	if (data->flag['#'] && base != 10)
 		len += (base == 16) ? 2 : 1;
-	if (!(data->flag['-']) && (!(data->flag['0']) ||
-				(data->flag['0'] && data->flag['.'])))
+	if (data->flag['_'] && !(data->flag['-'] && !(data->flag['0'] ||
+				(data->flag['0'] && data->flag['.']))))
 		save_char(data, data->flag['_'] - max(data->flag['/'], len), 1, ' ');
 	if (data->flag['#'] && (base == 8 || base == 16))
 		data->p[data->k++] = '0';
