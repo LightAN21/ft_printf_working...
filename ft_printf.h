@@ -6,7 +6,7 @@
 /*   By: jtsai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/14 14:37:07 by jtsai             #+#    #+#             */
-/*   Updated: 2018/08/23 17:19:14 by jtsai            ###   ########.fr       */
+/*   Updated: 2018/08/25 15:23:09 by jtsai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void							save_itoa_base(t_var *v,
 void							save_char(t_var *v,
 		int bound, int mark, char c);
 void							deal_int(t_var *v, t_long num);
-void							deal_int_u(t_var *v, t_max num);
 void							deal_int_base(t_var *data,
 		t_max num, t_max base, char c);
 void							save_str(t_var *v, char *s, t_max len);

@@ -6,7 +6,7 @@
 /*   By: jtsai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/23 08:05:49 by jtsai             #+#    #+#             */
-/*   Updated: 2018/08/23 17:16:38 by jtsai            ###   ########.fr       */
+/*   Updated: 2018/08/25 15:23:38 by jtsai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,16 @@
 
 void	type_di(t_var *data, char type)
 {
-	if (type == 'D' || data->flag['l'] || data->flag['j'] ||
-			data->flag['t'] || data->flag['z'])
+	if (data->flag['j'])
+		deal_int(data, va_arg(data->args, intmax_t));
+	else if (data->flag['t'])
+		deal_int(data, va_arg(data->args, ptrdiff_t));
+	else if (data->flag['z'])
+		deal_int(data, va_arg(data->args, size_t));
+	else if (data->flag['l'])
 		deal_int(data, va_arg(data->args, t_long));
+	else if (type == 'D')
+		deal_int(data, va_arg(data->args, long));
 	else if (data->flag['h'])
 		deal_int(data, (short)va_arg(data->args, int));
 	else if (data->flag['H'])
@@ -29,11 +36,17 @@ void	type_oux(t_var *data, char type, t_max base)
 {
 	if (type == 'p')
 		data->flag['#'] = 1;
-	if (type == 'U' || type == 'O' || type == 'p' ||
-			data->flag['l'] || data->flag['j'])
+	if (data->flag['j'])
+		deal_int_base(data, va_arg(data->args, uintmax_t),
+				base, type);
+	else if (data->flag['t'])
+		deal_int_base(data, va_arg(data->args, ptrdiff_t),
+				base, type);
+	else if (data->flag['z'])
+		deal_int_base(data, va_arg(data->args, size_t),
+				base, type);
+	else if (type == 'U' || type == 'O' || type == 'p' || data->flag['l'])
 		deal_int_base(data, va_arg(data->args, t_max), base, type);
-	else if (data->flag['t'] || data->flag['z'])
-		deal_int_base(data, va_arg(data->args, t_long), base, type);
 	else if (data->flag['h'])
 		deal_int_base(data, (unsigned short)va_arg(data->args, int),
 				base, type);
