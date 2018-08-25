@@ -6,7 +6,7 @@
 /*   By: jtsai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/23 08:05:49 by jtsai             #+#    #+#             */
-/*   Updated: 2018/08/25 15:27:28 by jtsai            ###   ########.fr       */
+/*   Updated: 2018/08/25 15:56:13 by jtsai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ void	type_di(t_var *data, char type)
 	else if (data->flag['l'])
 		deal_int(data, va_arg(data->args, t_long));
 	else if (type == 'D')
-		deal_int(data, va_arg(data->args, long));
+		deal_int(data, (long)va_arg(data->args, long));
 	else if (data->flag['h'])
 		deal_int(data, (short)va_arg(data->args, int));
 	else if (data->flag['H'])
 		deal_int(data, (char)va_arg(data->args, int));
 	else
-		deal_int(data, (t_long)va_arg(data->args, int));
+		deal_int(data, (int)va_arg(data->args, int));
 }
 
 void	type_oux(t_var *data, char type, t_max base)
