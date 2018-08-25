@@ -6,7 +6,7 @@
 /*   By: jtsai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/14 14:37:07 by jtsai             #+#    #+#             */
-/*   Updated: 2018/08/25 15:23:09 by jtsai            ###   ########.fr       */
+/*   Updated: 2018/08/25 16:27:09 by jtsai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ int								type(int k);
 int								read_flags(t_var *v, char *s, int i);
 int								re_atoi(char *s, int *i);
 void							save_itoa(t_var *v, int k, t_long num);
-void							save_itoa_u(t_var *v, int k, t_max num);
 void							save_itoa_base(t_var *v,
 		t_max num, t_max base, char c);
 void							save_char(t_var *v,
