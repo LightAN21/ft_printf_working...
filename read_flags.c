@@ -6,7 +6,7 @@
 /*   By: jtsai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/18 15:53:24 by jtsai             #+#    #+#             */
-/*   Updated: 2018/08/25 17:40:18 by jtsai            ###   ########.fr       */
+/*   Updated: 2018/08/25 18:48:35 by jtsai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,22 +47,22 @@ int		read_flags(t_var *data, char *s, int i)
 		if ('1' <= s[i] && s[i] <= '9')
 			data->flag['_'] = re_atoi(s + i, &i);
 		else if (s[i] == '*')
-			data->flag['_'] = -42;
+			data->flag['_'] = -42 | (++i & 0);
 		else if (s[i] == '.' && '1' <= s[i + 1] && s[i + 1] <= '9')
 		{
 			data->flag['.'] = 1;
 			if ('1' <= s[i + 1] && s[i + 1] <= '9')
 				data->flag['/'] = re_atoi(s + (++i), &i);
 			else if (s[i + 1] == '*')
-				data->flag['/'] = -42;
+				data->flag['/'] = -42 | (++i & 0);
 		}
 		else if (s[i] == 'h' && s[i + 1] == 'h')
 		{
-			data->flag['H'] += 1;
+			data->flag['H'] = 1;
 			i += 2;
 		}
 		else if (s[i] < 127)
-			data->flag[(t_max)s[i++]] += 1;
+			data->flag[(t_max)s[i++]] = 1;
 		else
 			i++;
 	}

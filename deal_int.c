@@ -6,7 +6,7 @@
 /*   By: jtsai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/17 10:53:18 by jtsai             #+#    #+#             */
-/*   Updated: 2018/08/25 16:19:13 by jtsai            ###   ########.fr       */
+/*   Updated: 2018/08/25 18:42:06 by jtsai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		max(int a, int b)
 
 void	deal_zero_base(t_var *data, t_max base)
 {
-	t_max	len;
+	t_long	len;
 
 	len = 1;
 	if (data->flag['_'] && (!(data->flag['-']) && (!(data->flag['0']) ||
@@ -74,7 +74,7 @@ void	deal_int(t_var *data, t_long num)
 
 void	deal_int_base(t_var *data, t_max num, t_max base, char type)
 {
-	t_max	len;
+	t_long	len;
 	t_max	i;
 
 	if (num == 0 && type != 'p')

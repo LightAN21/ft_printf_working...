@@ -6,7 +6,7 @@
 /*   By: jtsai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/23 16:30:50 by jtsai             #+#    #+#             */
-/*   Updated: 2018/08/25 17:53:02 by jtsai            ###   ########.fr       */
+/*   Updated: 2018/08/25 18:44:02 by jtsai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ t_max	ft_wide_strllen(wchar_t *s)
 	return (len);
 }
 
-void	save_wide_str(t_var *data, wchar_t *ws, t_max len)
+void	save_wide_str(t_var *data, wchar_t *ws, t_long len)
 {
-	t_max	i;
+	t_long	i;
 
 	i = -1;
 	while (++i < len)
@@ -65,7 +65,7 @@ void	save_wide_str(t_var *data, wchar_t *ws, t_max len)
 
 void	save_wide_string(t_var *data, wchar_t *ws)
 {
-	t_max	len;
+	t_long	len;
 	t_max	w;
 
 	if (ws == NULL)

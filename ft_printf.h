@@ -6,7 +6,7 @@
 /*   By: jtsai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/14 14:37:07 by jtsai             #+#    #+#             */
-/*   Updated: 2018/08/25 17:48:51 by jtsai            ###   ########.fr       */
+/*   Updated: 2018/08/25 18:40:30 by jtsai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ typedef struct					s_var
 	va_list						args;
 	int							k;
 	char						p[LEN];
-	t_max						flag[128];
-	t_max						return_value;
+	t_long						flag[128];
+	t_long						return_value;
 }								t_var;
 
 /*

@@ -6,7 +6,7 @@
 /*   By: jtsai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/18 10:31:40 by jtsai             #+#    #+#             */
-/*   Updated: 2018/08/22 09:33:47 by jtsai            ###   ########.fr       */
+/*   Updated: 2018/08/25 18:42:46 by jtsai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	deal_char(t_var *data, int c)
 
 void	deal_str(t_var *data, char *s)
 {
-	t_max	len;
+	t_long	len;
 	t_max	w;
 
 	if (s == NULL)
