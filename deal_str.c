@@ -6,7 +6,7 @@
 /*   By: jtsai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/18 10:31:40 by jtsai             #+#    #+#             */
-/*   Updated: 2018/08/25 18:42:46 by jtsai            ###   ########.fr       */
+/*   Updated: 2018/08/25 21:38:35 by jtsai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,13 @@ void	deal_str(t_var *data, char *s)
 	t_long	len;
 	t_max	w;
 
-	if (s == NULL)
+	if (s == NULL && !(data->flag['.']))
 	{
 		null_str(data);
 		return ;
 	}
-	len = ft_strllen(s);
+	if (s)
+		len = ft_strllen(s);
 	if (data->flag['.'] && data->flag['/'] < len)
 		len = data->flag['/'];
 	if (data->flag['-'])
@@ -73,6 +74,6 @@ void	deal_str(t_var *data, char *s)
 		else
 			save_char(data, w, 0, ' ');
 	}
-	if (!data->flag['-'])
+	if (!data->flag['-'] && s != NULL)
 		save_str(data, s, len);
 }

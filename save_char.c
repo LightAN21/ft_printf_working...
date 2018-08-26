@@ -6,13 +6,13 @@
 /*   By: jtsai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/22 08:59:27 by jtsai             #+#    #+#             */
-/*   Updated: 2018/08/22 09:35:41 by jtsai            ###   ########.fr       */
+/*   Updated: 2018/08/25 19:30:50 by jtsai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	save_char(t_var *data, int bound, int mark, char c)
+void	save_char(t_var *data, t_long bound, t_long mark, char c)
 {
 	int		i;
 	char	tmp[10000];

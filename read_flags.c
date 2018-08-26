@@ -6,7 +6,7 @@
 /*   By: jtsai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/18 15:53:24 by jtsai             #+#    #+#             */
-/*   Updated: 2018/08/25 19:13:08 by jtsai            ###   ########.fr       */
+/*   Updated: 2018/08/25 20:55:49 by jtsai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,34 @@ void	init_flags(t_var *data)
 	data->flag['z'] = 0;
 }
 
+int		star_and_precision(t_var *data, char *s, int i)
+{
+	int	tmp;
+
+	if (s[i] == '*')
+	{
+		tmp = va_arg(data->args, int);
+		if (tmp < 0)
+			data->flag['-'] = 1;
+		tmp = (tmp >= 0) ? tmp : -tmp;
+		data->flag['_'] = tmp | (++i & 0);
+	}
+	else if (s[i] == '.')
+	{
+		data->flag['.'] = 1 | (++i & 0);
+		if ('1' <= s[i] && s[i] <= '9')
+			data->flag['/'] = re_atoi(s + i, &i);
+		else if (s[i] == '*')
+		{
+			tmp = va_arg(data->args, int);
+			data->flag['.'] = (tmp < 0) ? 0 : 1;
+			tmp = (tmp >= 0) ? tmp : 0;
+			data->flag['/'] = tmp | (++i & 0);
+		}
+	}
+	return (i);
+}
+
 int		read_flags(t_var *data, char *s, int i)
 {
 	init_flags(data);
@@ -46,23 +74,15 @@ int		read_flags(t_var *data, char *s, int i)
 	{
 		if ('1' <= s[i] && s[i] <= '9')
 			data->flag['_'] = re_atoi(s + i, &i);
-		else if (s[i] == '*')
-			data->flag['_'] = va_arg(data->args, t_long) | (++i & 0);
-		else if (s[i] == '.' && '1' <= s[i + 1] && s[i + 1] <= '9')
-		{
-			data->flag['.'] = 1;
-			if ('1' <= s[i + 1] && s[i + 1] <= '9')
-				data->flag['/'] = re_atoi(s + (++i), &i);
-			else if (s[i + 1] == '*')
-				data->flag['/'] = va_arg(data->args, t_long) | (++i & 0);
-		}
+		else if (s[i] == '*' || s[i] == '.')
+			i = star_and_precision(data, s, i);
 		else if (s[i] == 'h' && s[i + 1] == 'h')
 		{
 			data->flag['H'] = 1;
 			i += 2;
 		}
 		else if (s[i] < 127)
-			data->flag[(t_max)s[i++]] = 1;
+			data->flag[(t_long)s[i++]] = 1;
 		else
 			i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: jtsai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/14 14:37:07 by jtsai             #+#    #+#             */
-/*   Updated: 2018/08/25 18:40:30 by jtsai            ###   ########.fr       */
+/*   Updated: 2018/08/25 21:03:47 by jtsai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <stdarg.h>
 # include <stddef.h>
 # include <inttypes.h>
-# include <stdio.h>
+# include <locale.h>
 
 # define LEN 151072
 
@@ -48,7 +48,7 @@ void							save_itoa(t_var *v, int k, t_long num);
 void							save_itoa_base(t_var *v,
 		t_max num, t_max base, char c);
 void							save_char(t_var *v,
-		int bound, int mark, char c);
+		t_long bound, t_long mark, char c);
 void							deal_int(t_var *v, t_long num);
 void							deal_int_base(t_var *data,
 		t_max num, t_max base, char c);
