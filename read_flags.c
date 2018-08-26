@@ -6,7 +6,7 @@
 /*   By: jtsai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/18 15:53:24 by jtsai             #+#    #+#             */
-/*   Updated: 2018/08/25 16:33:54 by jtsai            ###   ########.fr       */
+/*   Updated: 2018/08/25 17:40:18 by jtsai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,15 @@ int		read_flags(t_var *data, char *s, int i)
 	{
 		if ('1' <= s[i] && s[i] <= '9')
 			data->flag['_'] = re_atoi(s + i, &i);
+		else if (s[i] == '*')
+			data->flag['_'] = -42;
 		else if (s[i] == '.' && '1' <= s[i + 1] && s[i + 1] <= '9')
 		{
 			data->flag['.'] = 1;
-			data->flag['/'] = re_atoi(s + (++i), &i);
+			if ('1' <= s[i + 1] && s[i + 1] <= '9')
+				data->flag['/'] = re_atoi(s + (++i), &i);
+			else if (s[i + 1] == '*')
+				data->flag['/'] = -42;
 		}
 		else if (s[i] == 'h' && s[i + 1] == 'h')
 		{

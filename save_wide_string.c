@@ -6,7 +6,7 @@
 /*   By: jtsai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/23 16:30:50 by jtsai             #+#    #+#             */
-/*   Updated: 2018/08/25 17:02:34 by jtsai            ###   ########.fr       */
+/*   Updated: 2018/08/25 17:53:02 by jtsai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,56 @@ void	save_wide_char(t_var *data, wchar_t wc)
 	}
 }
 
-void	save_wide_string(t_var *data, wchar_t *ws)
+t_max	ft_wide_strllen(wchar_t *s)
+{
+	t_max len;
+
+	len = 0;
+	while (s[len])
+		len++;
+	return (len);
+}
+
+void	save_wide_str(t_var *data, wchar_t *ws, t_max len)
 {
 	t_max	i;
 
-	if (ws)
+	i = -1;
+	while (++i < len)
 	{
-		i = 0;
-		while (ws[i] != 0)
-			save_wide_char(data, ws[i++]);
+		save_wide_char(data, ws[i++]);
+		if (data->k >= 10000)
+		{
+			write(1, data->p, data->k);
+			data->return_value += data->k;
+			data->k = 0;
+		}
 	}
+}
+
+void	save_wide_string(t_var *data, wchar_t *ws)
+{
+	t_max	len;
+	t_max	w;
+
+	if (ws == NULL)
+	{
+		null_str(data);
+		return ;
+	}
+	len = ft_wide_strllen(ws);
+	if (data->flag['.'] && data->flag['/'] < len)
+		len = data->flag['/'];
+	if (data->flag['-'])
+		save_wide_str(data, ws, len);
+	w = data->flag['_'] - len;
+	if (w > 0)
+	{
+		if (data->flag['0'] && !data->flag['-'])
+			save_char(data, w, 0, '0');
+		else
+			save_char(data, w, 0, ' ');
+	}
+	if (!data->flag['-'])
+		save_wide_str(data, ws, len);
 }

@@ -6,7 +6,7 @@
 /*   By: jtsai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/14 14:37:07 by jtsai             #+#    #+#             */
-/*   Updated: 2018/08/25 16:44:50 by jtsai            ###   ########.fr       */
+/*   Updated: 2018/08/25 17:48:51 by jtsai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,6 @@ void							deal_str(t_var *v, char *s);
 void							deal_char(t_var *v, int c);
 void							save_wide_char(t_var *data, wchar_t wc);
 void							save_wide_string(t_var *data, wchar_t *ws);
+void							null_str(t_var *data);
 
 #endif
