@@ -6,7 +6,7 @@
 /*   By: jtsai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/23 08:05:49 by jtsai             #+#    #+#             */
-/*   Updated: 2018/08/25 17:06:42 by jtsai            ###   ########.fr       */
+/*   Updated: 2018/08/25 17:07:46 by jtsai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	type_oux(t_var *data, char type, t_max base)
 
 int		read_specifier(t_var *data, char type, int i)
 {
-	if (type == 's' && !data->['l'])
+	if (type == 's' && !data->flag['l'])
 		deal_str(data, va_arg(data->args, char *));
 	else if (type == 'c' || type == '%' || type == 'C')
 		deal_char(data, (type - '%') ? (char)va_arg(data->args, int) : '%');
