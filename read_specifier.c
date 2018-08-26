@@ -6,7 +6,7 @@
 /*   By: jtsai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/23 08:05:49 by jtsai             #+#    #+#             */
-/*   Updated: 2018/08/25 17:07:46 by jtsai            ###   ########.fr       */
+/*   Updated: 2018/08/25 17:09:56 by jtsai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int		read_specifier(t_var *data, char type, int i)
 		type_oux(data, type, 16);
 	else if (type == 'C')
 		save_wide_char(data, va_arg(data->args, wchar_t));
-	else if (type == 'S')
+	else if (type == 'S' || (type == 's' && data->flag['l']))
 		save_wide_string(data, va_arg(data->args, wchar_t *));
 	else if (type < 32)
 		i--;
