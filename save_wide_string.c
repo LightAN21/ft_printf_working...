@@ -6,7 +6,7 @@
 /*   By: jtsai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/23 16:30:50 by jtsai             #+#    #+#             */
-/*   Updated: 2018/08/25 17:00:31 by jtsai            ###   ########.fr       */
+/*   Updated: 2018/08/25 17:02:34 by jtsai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,6 @@ void	save_wide_char(t_var *data, wchar_t wc)
 	}
 }
 
-void	save_wide_char_error(t_var *data, wchar_t wc)
-{
-	data->p[data->k++] = (char)wc;
-}
-
 void	save_wide_string(t_var *data, wchar_t *ws)
 {
 	t_max	i;
@@ -49,6 +44,6 @@ void	save_wide_string(t_var *data, wchar_t *ws)
 	{
 		i = 0;
 		while (ws[i] != 0)
-			save_wide_char_error(data, ws[i++]);
+			save_wide_char(data, ws[i++]);
 	}
 }
