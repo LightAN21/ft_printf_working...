@@ -6,7 +6,7 @@
 /*   By: jtsai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/18 10:31:40 by jtsai             #+#    #+#             */
-/*   Updated: 2018/08/25 21:38:35 by jtsai            ###   ########.fr       */
+/*   Updated: 2018/08/29 14:55:33 by jtsai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	null_str(t_var *data)
 	data->p[data->k++] = ')';
 }
 
-t_max	ft_strllen(char *s)
+t_long	ft_strllen(char *s)
 {
 	int len;
 

@@ -6,7 +6,7 @@
 /*   By: jtsai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/17 10:53:18 by jtsai             #+#    #+#             */
-/*   Updated: 2018/08/25 22:16:36 by jtsai            ###   ########.fr       */
+/*   Updated: 2018/08/30 10:08:00 by jtsai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,10 +90,10 @@ void	deal_int_base(t_var *data, t_max num, t_max base, char type)
 		++len;
 	if (data->flag['#'] && base != 10)
 		data->flag['_'] -= (base == 16) ? 2 : 1;
-	if (data->flag['_'] && (!(data->flag['-']) && (!(data->flag['0']) ||
+	if (data->flag['_'] > 0 && (!(data->flag['-']) && (!(data->flag['0']) ||
 					(data->flag['0'] && data->flag['.']))))
 		save_char(data, data->flag['_'] - max(data->flag['/'], len), 1, ' ');
-	if (data->flag['#'] && (base == 8 || base == 16))
+	if (data->flag['#'] && (base == 16 || data->flag['/'] < len))
 		data->p[data->k++] = '0';
 	if (data->flag['#'] && (base == 16 || type == 'p'))
 		data->p[data->k++] = (type == 'X') ? 'X' : 'x';

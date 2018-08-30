@@ -6,7 +6,7 @@
 /*   By: jtsai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/18 15:53:24 by jtsai             #+#    #+#             */
-/*   Updated: 2018/08/25 20:55:49 by jtsai            ###   ########.fr       */
+/*   Updated: 2018/08/30 09:27:04 by jtsai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,7 @@ int		star_and_precision(t_var *data, char *s, int i)
 {
 	int	tmp;
 
-	if (s[i] == '*')
-	{
-		tmp = va_arg(data->args, int);
-		if (tmp < 0)
-			data->flag['-'] = 1;
-		tmp = (tmp >= 0) ? tmp : -tmp;
-		data->flag['_'] = tmp | (++i & 0);
-	}
-	else if (s[i] == '.')
+	if (s[i] == '.')
 	{
 		data->flag['.'] = 1 | (++i & 0);
 		if ('1' <= s[i] && s[i] <= '9')
@@ -61,6 +53,14 @@ int		star_and_precision(t_var *data, char *s, int i)
 			tmp = (tmp >= 0) ? tmp : 0;
 			data->flag['/'] = tmp | (++i & 0);
 		}
+	}
+	else if (s[i] == '*')
+	{
+		tmp = va_arg(data->args, int);
+		if (tmp < 0)
+			data->flag['-'] = 1;
+		tmp = (tmp >= 0) ? tmp : -tmp;
+		data->flag['_'] = tmp | (++i & 0);
 	}
 	return (i);
 }
@@ -81,10 +81,13 @@ int		read_flags(t_var *data, char *s, int i)
 			data->flag['H'] = 1;
 			i += 2;
 		}
-		else if (s[i] < 127)
+		else if (s[i] == 'l' || s[i] == 'h' || s[i] == 'j' ||
+				s[i] == 'j' || s[i] == 't' || s[i] == 'z' ||
+				s[i] == ' ' || s[i] == '+' || s[i] == '-' ||
+				s[i] == '0' || s[i] == '#')
 			data->flag[(t_long)s[i++]] = 1;
 		else
-			i++;
+			break ;
 	}
 	return (i);
 }
