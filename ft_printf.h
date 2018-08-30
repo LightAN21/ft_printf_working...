@@ -6,13 +6,12 @@
 /*   By: jtsai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/14 14:37:07 by jtsai             #+#    #+#             */
-/*   Updated: 2018/08/30 11:51:58 by jtsai            ###   ########.fr       */
+/*   Updated: 2018/08/30 12:06:27 by jtsai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
-# include "libft/includes/libft.h"
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdarg.h>

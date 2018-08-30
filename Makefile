@@ -6,7 +6,7 @@
 #    By: jtsai <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/08/17 12:19:42 by jtsai             #+#    #+#              #
-#    Updated: 2018/08/23 16:48:38 by jtsai            ###   ########.fr        #
+#    Updated: 2018/08/30 12:06:03 by jtsai            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,18 +25,15 @@ OFILES = $(FILES:.c=.o)
 all: $(NAME)
 
 $(NAME):
-	make -C libft/
-	gcc $(FLAGS) -I libft/includes/ -c $(FILES)
+	gcc $(FLAGS) -c $(FILES)
 	ar rc $(NAME) $(OFILES)
 	ranlib $(NAME)
-#	gcc -g $(MAIN) $(FILES) libft/*.c
+#	gcc -g *.c
 
 clean:
-	make -C libft/ clean
 	/bin/rm -f $(OFILES)
 
 fclean: clean
-	make -C libft/ fclean
 	/bin/rm -f $(NAME)
 
 re: fclean all
