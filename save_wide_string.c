@@ -6,7 +6,7 @@
 /*   By: jtsai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/23 16:30:50 by jtsai             #+#    #+#             */
-/*   Updated: 2018/08/30 11:09:28 by jtsai            ###   ########.fr       */
+/*   Updated: 2018/08/30 12:36:31 by jtsai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,29 +38,32 @@ void	save_wide_char(t_var *data, wchar_t wc)
 
 t_long	ft_wide_strllen(wchar_t *s)
 {
-	t_long len;
+	t_long	len;
+	t_long	i;
 
 	len = 0;
-	while (s[len])
-		len++;
+	i = -1;
+	while (s[++i])
+	{
+		if (s[i] <= 0x7F)
+			len++;
+		else if (s[i] <= 0x7FF)
+			len += 2;
+		else if (s[i] <= 0xFFFF)
+			len += 3;
+		else if (s[i] <= 0x10FFFF)
+			len += 4;
+	}
 	return (len);
 }
 
-void	save_wide_str(t_var *data, wchar_t *ws, t_long len)
+void	save_wide_str(t_var *data, wchar_t *ws)
 {
 	t_long	i;
 
 	i = -1;
-	while (++i < len)
-	{
+	while (ws[++i])
 		save_wide_char(data, ws[i]);
-		if (data->k >= 10000)
-		{
-			write(1, data->p, data->k);
-			data->return_value += data->k;
-			data->k = 0;
-		}
-	}
 }
 
 void	deal_wide_char(t_var *data, wchar_t wc)
@@ -95,7 +98,7 @@ void	deal_wide_string(t_var *data, wchar_t *ws)
 	if (data->flag['.'] && data->flag['/'] < len)
 		len = data->flag['/'];
 	if (data->flag['-'])
-		save_wide_str(data, ws, len);
+		save_wide_str(data, ws);
 	w = data->flag['_'] - len;
 	if (w > 0)
 	{
@@ -105,5 +108,5 @@ void	deal_wide_string(t_var *data, wchar_t *ws)
 			save_char(data, w, 0, ' ');
 	}
 	if (!data->flag['-'])
-		save_wide_str(data, ws, len);
+		save_wide_str(data, ws);
 }
