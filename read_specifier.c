@@ -6,7 +6,7 @@
 /*   By: jtsai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/23 08:05:49 by jtsai             #+#    #+#             */
-/*   Updated: 2018/08/30 10:09:46 by jtsai            ###   ########.fr       */
+/*   Updated: 2018/08/30 11:52:32 by jtsai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ int		read_specifier(t_var *data, char type, int i)
 {
 	if (type == 's' && !data->flag['l'])
 		deal_str(data, va_arg(data->args, char *));
-	else if (type == 'c' || type == '%' || type == 'C')
-		deal_char(data, (type - '%') ? (char)va_arg(data->args, int) : '%');
+	else if (type == 'c' || type == 'C')
+		deal_char(data, (unsigned char)va_arg(data->args, int));
 	else if (type == 'd' || type == 'i' || type == 'D')
 		type_di(data, type);
 	else if (type == 'u' || type == 'U')
@@ -71,10 +71,14 @@ int		read_specifier(t_var *data, char type, int i)
 		type_oux(data, type, 8);
 	else if (type == 'x' || type == 'X' || type == 'p')
 		type_oux(data, type, 16);
-	else if (type == 'C')
-		save_wide_char(data, va_arg(data->args, wchar_t));
+	else if (type == 'b')
+		type_oux(data, type, 2);
 	else if (type == 'S' || (type == 's' && data->flag['l']))
-		save_wide_string(data, va_arg(data->args, wchar_t *));
+		deal_l_str(data, va_arg(data->args, wchar_t *));
+	else if (type == 'r')
+		deal_wide_char(data, va_arg(data->args, wchar_t));
+	else if (type == 'R')
+		deal_wide_string(data, va_arg(data->args, wchar_t *));
 	else if (type != 0)
 		deal_char(data, type);
 	else

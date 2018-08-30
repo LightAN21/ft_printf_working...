@@ -6,7 +6,7 @@
 /*   By: jtsai <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/23 16:30:50 by jtsai             #+#    #+#             */
-/*   Updated: 2018/08/25 18:59:04 by jtsai            ###   ########.fr       */
+/*   Updated: 2018/08/30 11:09:28 by jtsai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,25 @@ void	save_wide_str(t_var *data, wchar_t *ws, t_long len)
 	}
 }
 
-void	save_wide_string(t_var *data, wchar_t *ws)
+void	deal_wide_char(t_var *data, wchar_t wc)
+{
+	int	w;
+
+	if (data->flag['-'])
+		save_wide_char(data, wc);
+	w = data->flag['_'] - 1;
+	if (w)
+	{
+		if (data->flag['0'] && !data->flag['-'])
+			save_char(data, w, 0, '0');
+		else
+			save_char(data, w, 0, ' ');
+	}
+	if (!data->flag['-'])
+		save_wide_char(data, wc);
+}
+
+void	deal_wide_string(t_var *data, wchar_t *ws)
 {
 	t_long	len;
 	t_max	w;
